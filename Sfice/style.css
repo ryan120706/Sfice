@@ -1,7 +1,8 @@
 
         /* --- 1. MODERN WEBSITE DESIGN --- */
+        /* #0056b3 old blue used in website */
         :root {
-            --primary-color: #0056b3;
+            --primary-color: #f97025;
             --text-color: #333;
             --bg-color: #f8f9fa;
         }

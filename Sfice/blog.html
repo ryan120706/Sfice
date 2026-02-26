@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>News & Testimonials - SFiCE Foundation</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         /* General Modern Styling */
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; line-height: 1.6; }
-        header, main, footer { max-width: 1000px; margin: auto; padding: 20px; }
+        /*body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; line-height: 1.6; }
+        header, main, footer { max-width: 1000px; margin: auto; padding: 20px; } */
         
         /* Grid for the Blog Cards */
         .blog-grid {
@@ -93,19 +94,32 @@
 </head>
 <body>
     <header>
-        <div aria-label="Language Selection">
-            <a href="blog.html" aria-current="page">English</a> | <a href="#es">Español</a> | <a href="#ur">اردو</a>
+        <div class="header-top">
+            <h1>SFiCE Foundation</h1>
+            
+            <div class="custom-translate-wrapper">
+                <span>🌐</span>
+                <select id="customLanguageSelect" onchange="translatePage(this.value)">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="ur">اردو</option>
+                    <option value="pl">Polski</option>
+                    <option value="ar">العربية</option>
+                    <option value="fr">Français</option>
+                </select>
+            </div>
         </div>
-        <hr>
-        <h1>SFiCE Foundation</h1>
+        
+        <p class="tagline">Empowering marginalised and vulnerable communities in Nottingham through support, education, and wellbeing.</p>
+        
         <nav aria-label="Main Navigation">
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
+                <li><a href="index.html" >Home</a></li>
+                <li><a href="about.html" >About Us</a></li>
                 <li><a href="projects.html">Services & Support</a></li>
-                <li><a href="calendar.html">Live Calendar</a></li>
-                <li><a href="referral.html">Referrals & Sign-up</a></li>
-                <li><a href="blog.html">News & Testimonials</a></li>
+                <li><a href="calendar.html" >Live Calendar</a></li>
+                <li><a href="referral.html" >Referrals & Sign-up</a></li>
+                <li><a href="blog.html" aria-current="page">News & Testimonials</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="donate.html">Donate</a></li>
             </ul>
@@ -130,6 +144,11 @@
             <iframe id="modalIframe" class="modal-iframe" src=""></iframe>
         </div>
     </div>
+
+    <div id="google_translate_element"></div>
+
+    <script src="translate.js"></script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
         // --- STEP 1: Fetch live data from Google Apps Script ---
