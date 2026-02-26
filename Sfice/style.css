@@ -1,0 +1,110 @@
+
+        /* --- 1. MODERN WEBSITE DESIGN --- */
+        /* #0056b3 old blue used in website */
+        :root {
+            --primary-color: #f97025;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+        }
+
+        header {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 { margin: 0; color: var(--primary-color); }
+        .tagline { text-align: center; color: #666; font-style: italic; }
+
+        /* Navigation Menu */
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover, nav a[aria-current="page"] {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* --- 2. CUSTOM TRANSLATE UI --- */
+        .custom-translate-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f1f3f5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid #ced4da;
+        }
+
+        .custom-translate-wrapper select {
+            background: transparent;
+            border: none;
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--text-color);
+            cursor: pointer;
+            outline: none;
+        }
+
+        /* --- 3. THE ULTIMATE GOOGLE BANNER BLOCKER --- */
+        #google_translate_element { display: none !important; } /* Hides original widget */
+        
+        /* This specifically targets the pop-up iframe you screenshotted */
+        iframe.skiptranslate { display: none !important; visibility: hidden !important; }
+        .goog-te-banner-frame { display: none !important; visibility: hidden !important; }
+        
+        /* Stops Google from pushing the top of the webpage down */
+        body { top: 0px !important; position: static !important; min-height: 100vh; }
+        
+        /* Removes the hover popups and yellow highlights */
+        .goog-tooltip { display: none !important; }
+        .goog-tooltip:hover { display: none !important; }
+        .goog-text-highlight { background-color: transparent !important; box-shadow: none !important; }
