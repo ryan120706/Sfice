@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFiCE Foundation - Supporting Nottingham Communities</title>
+    
+    <style>
+        /* --- 1. MODERN WEBSITE DESIGN --- */
+        :root {
+            --primary-color: #0056b3;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+        }
+
+        header {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 { margin: 0; color: var(--primary-color); }
+        .tagline { text-align: center; color: #666; font-style: italic; }
+
+        /* Navigation Menu */
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover, nav a[aria-current="page"] {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* --- 2. CUSTOM TRANSLATE UI --- */
+        .custom-translate-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f1f3f5;
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid #ced4da;
+        }
+
+        .custom-translate-wrapper select {
+            background: transparent;
+            border: none;
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--text-color);
+            cursor: pointer;
+            outline: none;
+        }
+
+        /* --- 3. THE ULTIMATE GOOGLE BANNER BLOCKER --- */
+        #google_translate_element { display: none !important; } /* Hides original widget */
+        
+        /* This specifically targets the pop-up iframe you screenshotted */
+        iframe.skiptranslate { display: none !important; visibility: hidden !important; }
+        .goog-te-banner-frame { display: none !important; visibility: hidden !important; }
+        
+        /* Stops Google from pushing the top of the webpage down */
+        body { top: 0px !important; position: static !important; min-height: 100vh; }
+        
+        /* Removes the hover popups and yellow highlights */
+        .goog-tooltip { display: none !important; }
+        .goog-tooltip:hover { display: none !important; }
+        .goog-text-highlight { background-color: transparent !important; box-shadow: none !important; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <h1>SFiCE Foundation</h1>
+            
+            <div class="custom-translate-wrapper">
+                <span>🌐</span>
+                <select id="customLanguageSelect" onchange="translatePage(this.value)">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="ur">اردو</option>
+                    <option value="pl">Polski</option>
+                    <option value="ar">العربية</option>
+                    <option value="fr">Français</option>
+                </select>
+            </div>
+        </div>
+        
+        <p class="tagline">Empowering marginalised and vulnerable communities in Nottingham through support, education, and wellbeing.</p>
+        
+        <nav aria-label="Main Navigation">
+            <ul>
+                <li><a href="index.html" aria-current="page">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="projects.html">Services & Support</a></li>
+                <li><a href="calendar.html">Live Calendar</a></li>
+                <li><a href="referral.html">Referrals & Sign-up</a></li>
+                <li><a href="blog.html">News & Testimonials</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="donate.html">Donate</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section>
+            <h2>Welcome to SFiCE Foundation</h2>
+            <p>We provide a central hub for information, support, and connection. From fighting food poverty to offering ESOL (English for Speakers of Other Languages) classes, our goal is to improve lives and foster community engagement.</p>
+            <ul>
+                <li><strong>Need help?</strong> <a href="referral.html">Sign up for our services here.</a></li>
+                <li><strong>Looking to refer someone?</strong> <a href="referral.html">Use our digital referral form.</a></li>
+            </ul>
+        </section>
+        
+        <section>
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="calendar.html">View Upcoming Classes & Events</a></li>
+                <li><a href="projects.html">Learn about our Social Cafe</a></li>
+                <li><a href="blog.html">Read Community Stories</a></li>
+            </ul>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2026 SFiCE Foundation. Charity Reg. No. 1155645. | <a href="#accessibility">Accessibility Statement</a></p>
+    </footer>
+
+    <div id="google_translate_element"></div>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'es,ur,pl,ar,fr,en',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        function translatePage(languageCode) {
+            var googleSelect = document.querySelector('select.goog-te-combo');
+            if (googleSelect) {
+                googleSelect.value = languageCode;
+                googleSelect.dispatchEvent(new Event('change'));
+            }
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

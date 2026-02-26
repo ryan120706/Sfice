@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News & Testimonials - SFiCE Foundation</title>
+    <style>
+        /* General Modern Styling */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; line-height: 1.6; }
+        header, main, footer { max-width: 1000px; margin: auto; padding: 20px; }
+        
+        /* Grid for the Blog Cards */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        /* Individual Blog Card */
+        .blog-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 150px;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            border-color: #0056b3;
+        }
+        .blog-card h3 { margin: 0; color: #0056b3; font-size: 1.2rem; }
+        .blog-card p { margin-top: 10px; font-size: 0.9rem; color: #666; }
+
+        /* Modal (Pop-up) Background Overlay */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); 
+            backdrop-filter: blur(4px); 
+        }
+
+        /* Modal Content Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 12px;
+            width: 80%;
+            max-width: 800px;
+            height: 75vh; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Close Button */
+        .close-btn {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-btn:hover, .close-btn:focus { color: #333; text-decoration: none; }
+
+        /* Iframe inside Modal */
+        .modal-iframe {
+            width: 100%;
+            flex-grow: 1;
+            border: none;
+            border-radius: 8px;
+            margin-top: 15px;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div aria-label="Language Selection">
+            <a href="blog.html" aria-current="page">English</a> | <a href="#es">Español</a> | <a href="#ur">اردو</a>
+        </div>
+        <hr>
+        <h1>SFiCE Foundation</h1>
+        <nav aria-label="Main Navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="projects.html">Services & Support</a></li>
+                <li><a href="calendar.html">Live Calendar</a></li>
+                <li><a href="referral.html">Referrals & Sign-up</a></li>
+                <li><a href="blog.html">News & Testimonials</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="donate.html">Donate</a></li>
+            </ul>
+        </nav>
+    </header>
+    <hr>
+    
+    <main>
+        <h2>Latest News & Stories</h2>
+        <p>Click on a card below to read the full story.</p>
+        
+        <div id="blogGrid" class="blog-grid">
+            <p>Loading latest news...</p>
+        </div>
+
+    </main>
+
+    <div id="docModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle" style="margin-top: 0;">Document Title</h2>
+            <iframe id="modalIframe" class="modal-iframe" src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        // --- STEP 1: Fetch live data from Google Apps Script ---
+        const webAppUrl = "https://script.google.com/macros/s/AKfycbw3--QwpVc3W7kab5ipHkmtHC37F4w-W1BsZBVDstmQLbItJM61p85xqVxfrUt4JR3NtQ/exec";
+
+        async function loadBlogPosts() {
+            const grid = document.getElementById('blogGrid');
+
+            try {
+                const response = await fetch(webAppUrl);
+                const docs = await response.json();
+                
+                grid.innerHTML = ''; // Clear loading text
+                
+                if (docs.length === 0) {
+                    grid.innerHTML = '<p>No news articles found right now. Check back soon!</p>';
+                    return;
+                }
+
+                // Loop through the live documents and build the cards
+                docs.forEach(doc => {
+                    const card = document.createElement('div');
+                    card.className = 'blog-card';
+                    
+                    card.innerHTML = `
+                        <h3>${doc.title}</h3>
+                        <p>Published: ${doc.date}</p>
+                    `;
+                    
+                    card.onclick = () => openModal(doc.title, doc.url);
+                    grid.appendChild(card);
+                });
+            } catch (error) {
+                console.error("Error fetching docs:", error);
+                grid.innerHTML = '<p>Sorry, we could not load the news right now.</p>';
+            }
+        }
+
+        // Call the function to load the posts when the page opens
+        loadBlogPosts();
+
+        // --- STEP 2: Handle the Modal (Pop-up) Logic ---
+        const modal = document.getElementById('docModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalIframe = document.getElementById('modalIframe');
+
+        function openModal(title, docUrl) {
+            modalTitle.innerText = title;
+            modalIframe.src = docUrl; // Load the doc into the pop-up
+            modal.style.display = "block"; // Show the modal
+        }
+
+        function closeModal() {
+            modal.style.display = "none"; // Hide the modal
+            modalIframe.src = ""; // Clear the iframe to stop it loading in the background
+        }
+
+        // Close modal if user clicks outside the white box
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
